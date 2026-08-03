@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Love 🌹</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@300;400;500&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  height:100vh;
+  background:radial-gradient(circle at top,#4a1638,#12000a);
+  font-family:'Poppins',sans-serif;
+  color:white;
+  overflow:hidden;
+}
+
+.page{
+  position:fixed;
+  inset:0;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+}
+
+/* BUTTON */
+.btn{
+  margin-top:16px;
+  padding:14px 30px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(135deg,#ff4d6d,#ff9db0);
+  color:white;
+  font-size:1em;
+  cursor:pointer;
+  box-shadow:0 10px 30px rgba(255,77,109,.5);
+  transition:.4s ease;
+}
+.btn:hover{
+  transform:translateY(-4px) scale(1.03);
+  box-shadow:0 14px 40px rgba(255,77,109,.8);
+}
+
+/* PASSWORD BOX */
+#passwordBox{
+  background:rgba(255,255,255,.12);
+  padding:40px;
+  border-radius:30px;
+  backdrop-filter:blur(20px);
+  box-shadow:0 20px 60px rgba(255,77,109,.4);
+}
+
+/* PASSWORD INPUT — UPDATED ONLY THIS */
+#passInput{
+  width:260px;
+  padding:16px 22px;
+  margin-top:18px;
+  border-radius:30px;
+  border:2px solid rgba(255,255,255,.25);
+  background:rgba(255,255,255,.15);
+  color:white;
+  font-size:1em;
+  outline:none;
+  text-align:center;
+  transition:.4s ease;
+}
+
+#passInput::placeholder{
+  color:rgba(255,255,255,.6);
+}
+
+#passInput:focus{
+  border-color:#ff9db0;
+  box-shadow:0 0 25px rgba(255,157,176,.7);
+  background:rgba(255,255,255,.22);
+}
+
+/* COVER */
+#coverPage img{
+  width:90%;
+  max-width:340px;
+  border-radius:24px;
+  box-shadow:0 30px 80px rgba(255,0,100,.6);
+  animation:pulse 2s infinite;
+}
+
+@keyframes pulse{50%{transform:scale(1.05);}}
+
+/* COVER TEXT */
+.coverText{
+  position:absolute;
+  top:8%;
+  text-align:center;
+}
+.coverText .line1{
+  font-family:'Dancing Script',cursive;
+  font-size:1.8em;
+  animation:slideDown 1.5s ease forwards;
+}
+.coverText .line2{
+  font-family:'Playfair Display',serif;
+  font-size:1em;
+  opacity:0;
+  animation:fadeUp 1.8s ease forwards;
+  animation-delay:.6s;
+}
+
+@keyframes slideDown{
+  from{opacity:0;transform:translateY(-20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(15px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* VIDEO */
+#videoPage video{
+  width:90%;
+  max-width:360px;
+  border-radius:24px;
+}
+.videoBtns{
+  margin-top:16px;
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+/* TEXT REVEAL */
+.reveal{
+  opacity:0;
+  animation:revealText 2s ease forwards;
+}
+.reveal.delay{animation-delay:1.2s;}
+@keyframes revealText{
+  from{opacity:0;transform:translateY(25px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* ROSE PAGE */
+.message{
+  display:none;
+  margin-top:14px;
+  background:rgba(255,255,255,.12);
+  padding:16px;
+  border-radius:18px;
+  animation:fadeMsg .6s ease;
+}
+@keyframes fadeMsg{
+  from{opacity:0;transform:scale(.95);}
+  to{opacity:1;transform:scale(1);}
+}
+
+/* FINAL */
+#finalPage{
+  background:radial-gradient(circle,#ff4d6d,#12000a);
+}
+#finalText{
+  font-family:'Playfair Display',serif;
+  font-size:3em;
+  animation:fadeFinal 2.5s ease forwards;
+}
+#forever{
+  margin-top:12px;
+  opacity:0;
+  animation:fadeFinal 2.5s ease forwards;
+  animation-delay:1.3s;
+}
+@keyframes fadeFinal{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+.heart{
+  position:absolute;
+  font-size:24px;
+  animation:explode 2s ease forwards;
+}
+@keyframes explode{
+  to{transform:translate(var(--x),var(--y)) scale(0);opacity:0;}
+}
+
+/* SPRINKLES */
+.sprinkle{
+  position:fixed;
+  top:-30px;
+  font-size:22px;
+  pointer-events:none;
+  animation:sprinkleFall linear forwards;
+}
+@keyframes sprinkleFall{
+  to{transform:translateY(120vh) rotate(360deg);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" loop>
+  <source src="Lets_Talk_Do_Gallan_1.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PASSWORD -->
+<div class="page" id="passwordPage" style="display:flex;">
+  <div id="passwordBox">
+    <h2>Enter Password ❤️</h2>
+    <input type="password" id="passInput" placeholder="Our special date 💖">
+    <button class="btn" onclick="checkPass()">Enter</button>
+    <!-- <div class="hint">hint: password is our special date</div> -->
+    <div class="error" id="error"></div>
+  </div>
+</div>
+
+<!-- COVER -->
+<div class="page" id="coverPage">
+  <div class="coverText">
+    <div class="line1">Hey SweetHeart 💖</div>
+    <div class="line2">Tap on the picture — one surprise is waiting for you ✨</div>
+  </div>
+  <img src="1.png" onclick="showVideo()">
+</div>
+
+<!-- VIDEO -->
+<div class="page" id="videoPage">
+  <video id="introVideo" src="v.mp4" muted></video>
+  <div class="videoBtns">
+    <button class="btn" onclick="togglePlay()">⏯ Pause / Play</button>
+    <button class="btn" onclick="toggleMute()">🔊 Mute / Unmute</button>
+    <button class="btn" onclick="goName()">Continue 💖</button>
+  </div>
+</div>
+
+<!-- NAME -->
+<div class="page" id="namePage">
+  <div class="reveal">
+    I just love and admire the way you take care of me, especially in public—the way you make me feel safe, valued, and proud to be by your side.
+  </div>
+  <div class="reveal delay">
+    Thank you for loving me like a rose 🌹❤️
+  </div>
+  <button class="btn" onclick="goRose()">Continue 💖</button>
+</div>
+
+<!-- ROSE -->
+<div class="page" id="rosePage">
+  <h1 style="font-family:'Dancing Script',cursive;">Happy Rose Day 🌹</h1>
+
+  <button class="btn" onclick="showMsg(1)">A Little Secret 💌</button>
+  <button class="btn" onclick="showMsg(2)">Why I Love You 💖</button>
+  <button class="btn" onclick="showMsg(3)">Forever Promise 🌙</button>
+  <button class="btn" onclick="finalScreen()">Open My Heart 💖</button>
+
+  <div class="message" id="msg1">You feel like home to me — safe, warm, and forever mine 🌹</div>
+  <div class="message" id="msg2">I love the way you exist… effortlessly, beautifully, perfectly ❤️</div>
+  <div class="message" id="msg3">No matter where life takes us, my heart chooses you. Always 💍</div>
+</div>
+
+<!-- FINAL -->
+<div class="page" id="finalPage">
+  <div id="finalText">I Love You ❤️</div>
+  <div id="forever">Yesterday • Today • Tomorrow</div>
+</div>
+
+<script>
+const PASS="01052025";
+
+function checkPass(){
+  if(passInput.value===PASS){
+    passwordPage.style.display="none";
+    coverPage.style.display="flex";
+    bgMusic.volume=0.6;
+    bgMusic.play().catch(()=>{});
+  } else error.innerText="Wrong password 💔";
+}
+
+function showVideo(){
+  coverPage.style.display="none";
+  videoPage.style.display="flex";
+  introVideo.play();
+}
+
+function togglePlay(){
+  introVideo.paused ? introVideo.play() : introVideo.pause();
+}
+
+function toggleMute(){
+  introVideo.muted=!introVideo.muted;
+  introVideo.muted ? bgMusic.play() : bgMusic.pause();
+}
+
+function goName(){
+  introVideo.pause();
+  videoPage.style.display="none";
+  namePage.style.display="flex";
+  bgMusic.play();
+}
+introVideo.onended=goName;
+
+function goRose(){
+  namePage.style.display="none";
+  rosePage.style.display="flex";
+}
+
+function showMsg(n){
+  document.querySelectorAll(".message").forEach(m=>m.style.display="none");
+  document.getElementById("msg"+n).style.display="block";
+}
+
+function finalScreen(){
+  rosePage.style.display="none";
+  finalPage.style.display="flex";
+  for(let i=0;i<40;i++){
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerText="❤️";
+    h.style.left="50%";
+    h.style.top="50%";
+    h.style.setProperty("--x",(Math.random()*400-200)+"px");
+    h.style.setProperty("--y",(Math.random()*400-200)+"px");
+    finalPage.appendChild(h);
+  }
+}
+
+const sprinkleEmojis=["🌹","❤️","💖","✨"];
+setInterval(()=>{
+  const s=document.createElement("div");
+  s.className="sprinkle";
+  s.innerText=sprinkleEmojis[Math.floor(Math.random()*sprinkleEmojis.length)];
+  s.style.left=Math.random()*100+"vw";
+  s.style.animationDuration=(6+Math.random()*4)+"s";
+  document.body.appendChild(s);
+  setTimeout(()=>s.remove(),10000);
+},600);
+</script>
+
+</body>
+</html>
