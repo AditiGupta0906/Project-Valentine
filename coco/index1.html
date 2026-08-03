@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Chocolate Day 🍫❤️</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #3e1f0f, #6b3a1e);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    header {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      background: url('bg.png') center/cover no-repeat;
+      position: relative;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+    }
+
+    header * { position: relative; z-index: 2; }
+
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+      animation: fadeDown 1.5s ease;
+    }
+
+    p.subtitle {
+      font-size: 1.1rem;
+      max-width: 600px;
+      animation: fadeUp 2s ease;
+    }
+
+    .btn {
+      margin-top: 30px;
+      padding: 12px 30px;
+      background: #c97b3a;
+      color: #3e1f0f;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    }
+
+    section {
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    section h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+      color: #ffd9b3;
+    }
+
+    .love-notes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .note {
+      background: rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 25px;
+      backdrop-filter: blur(6px);
+      transition: transform 0.4s;
+    }
+
+    .note:hover { transform: scale(1.05); }
+
+    .note h3 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+      color: #ffe6cc;
+    }
+
+    /* Slider */
+    .slider {
+      max-width: 700px;
+      margin: 40px auto 0;
+      position: relative;
+      overflow: hidden;
+      border-radius: 25px;
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.6s ease;
+    }
+
+    .slides img {
+  width: 100%;
+  height: 400px;          /* you can adjust this */
+  object-fit: contain;    /* KEY LINE – no cutting */
+  background: #000;       /* optional: fills empty space nicely */
+  flex-shrink: 0;
+}
+
+
+    .dots {
+      margin-top: 15px;
+    }
+
+    .dot {
+      height: 10px;
+      width: 10px;
+      background: #d9a066;
+      display: inline-block;
+      border-radius: 50%;
+      margin: 0 5px;
+      cursor: pointer;
+      opacity: 0.6;
+    }
+
+    .dot.active { opacity: 1; }
+
+    footer {
+      padding: 40px 20px;
+      background: #2a1409;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    footer span {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.4rem;
+      color: #ffd9b3;
+    }
+
+    /* Hidden love button */
+    #secretLove {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: transparent;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      opacity: 0.25;
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 5;
+    }
+
+    #secretLove:hover {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+
+    #lovePopup {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .popup-content {
+      background: linear-gradient(135deg, #5a2a0c, #8b4513);
+      padding: 40px 30px;
+      border-radius: 25px;
+      text-align: center;
+      max-width: 320px;
+      animation: pop 0.5s ease;
+    }
+
+    .popup-content h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .popup-content button {
+      margin-top: 20px;
+      padding: 8px 20px;
+      border: none;
+      border-radius: 20px;
+      background: #ffd9b3;
+      color: #3e1f0f;
+      cursor: pointer;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    /* Floating chocolates */
+    .choco {
+      position: fixed;
+      top: -50px;
+      font-size: 24px;
+      animation: fall linear infinite;
+      opacity: 0.7;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      to { transform: translateY(110vh) rotate(360deg); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Happy Chocolate Day, My Love 🍫</h1>
+    <p class="subtitle">
+      Just like chocolate, you make my life sweeter, warmer, and impossible to resist.
+      This little website is a tiny box of love made just for you 💕
+    </p>
+    <button class="btn" onclick="document.getElementById('notes').scrollIntoView({behavior:'smooth'})">
+      Open My Sweet Message 💌
+    </button>
+  </header>
+
+  <section id="notes">
+    <h2>Why You Are My Favorite Chocolate 🍫</h2>
+    <div class="love-notes">
+      <div class="note">
+        <h3>Sweet</h3>
+        <p>You always know how to make me smile, even on my worst days.</p>
+      </div>
+      <div class="note">
+        <h3>Comforting</h3>
+        <p>Being with you feels like the warm hug of my favorite chocolate.</p>
+      </div>
+      <div class="note">
+        <h3>Addictive</h3>
+        <p>Once I fell for you, there was no going back — and I love that.</p>
+      </div>
+    </div>
+
+    <div class="slider">
+      <div class="slides" id="slides">
+        <img src="1.png" />
+        <img src="2.png" />
+        <img src="3.png" />
+      </div>
+    </div>
+    <div class="dots" id="dots"></div>
+  </section>
+
+    <!-- Hidden Love Button -->
+  <button id="secretLove">🍫</button>
+  <div id="lovePopup">
+    <div class="popup-content">
+      <h2>I Love You ❤️</h2>
+      <p>You are my favorite person, my comfort, my sweetest addiction 🍫
+      <br/>Happy Chocolate Day, my love 💋</p> 
+      <button onclick="closeLove()">Close 💕</button>
+    </div>
+  </div>
+
+  <footer>
+    Made with extra chocolate & love by <span>Your Girl ❤️</span><br />
+    Happy Chocolate Day, baby 🍫💋 <br/>
+    <span style="font-size:20px;opacity:.6;">
+    there is one surprise you have to find sweetheart
+  </span>
+  </footer>
+
+  <script>
+    // Slider
+    const slides = document.getElementById('slides');
+    const totalSlides = slides.children.length;
+    const dotsContainer = document.getElementById('dots');
+    let index = 0;
+
+    for (let i = 0; i < totalSlides; i++) {
+      const dot = document.createElement('span');
+      dot.classList.add('dot');
+      if (i === 0) dot.classList.add('active');
+      dot.onclick = () => moveToSlide(i);
+      dotsContainer.appendChild(dot);
+    }
+
+    function moveToSlide(i) {
+      index = i;
+      slides.style.transform = `translateX(-${index * 100}%)`;
+      document.querySelectorAll('.dot').forEach((d, idx) => {
+        d.classList.toggle('active', idx === index);
+      });
+    }
+
+    setInterval(() => {
+      index = (index + 1) % totalSlides;
+      moveToSlide(index);
+    }, 4000);
+
+    // Floating chocolates
+    const emojis = ['🍫','🍩','🍪'];
+    setInterval(() => {
+      const choco = document.createElement('div');
+      choco.className = 'choco';
+      choco.style.left = Math.random() * 100 + 'vw';
+      choco.style.animationDuration = (4 + Math.random() * 4) + 's';
+      choco.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      document.body.appendChild(choco);
+      setTimeout(() => choco.remove(), 8000);
+    }, 500);
+
+    // Hidden love popup
+    const secretBtn = document.getElementById('secretLove');
+    const popup = document.getElementById('lovePopup');
+
+    secretBtn.addEventListener('click', () => {
+      popup.style.display = 'flex';
+    });
+
+    function closeLove() {
+      popup.style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>

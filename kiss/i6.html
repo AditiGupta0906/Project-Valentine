@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For My Love ❤️</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+        overflow-x: hidden;
+        color: #fff;
+      }
+
+      section {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 40px 20px;
+      }
+
+      /* Hero */
+      .hero h1 {
+        font-family: "Dancing Script", cursive;
+        font-size: 4rem;
+        animation: fadeIn 3s ease forwards;
+        opacity: 0;
+      }
+
+      .hero p {
+        margin-top: 20px;
+        font-size: 1.2rem;
+        max-width: 600px;
+        animation: fadeIn 4s ease forwards;
+        opacity: 0;
+      }
+
+      .btn {
+        margin-top: 30px;
+        padding: 12px 30px;
+        border: none;
+        background: white;
+        color: #ee9ca7;
+        border-radius: 30px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: 0.3s;
+      }
+
+      .btn:hover {
+        transform: scale(1.1);
+        background: #fff0f3;
+      }
+
+      /* Floating Hearts */
+      .heart {
+        position: fixed;
+        bottom: -20px;
+        font-size: 20px;
+        animation: float 8s linear infinite;
+        opacity: 0.7;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(-110vh);
+        }
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* Love Letter */
+      .letter {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        padding: 40px;
+        border-radius: 20px;
+        max-width: 700px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .letter h2 {
+        font-family: "Dancing Script", cursive;
+        font-size: 3rem;
+        margin-bottom: 20px;
+      }
+
+      .letter p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+      }
+
+      /* Memories Gallery */
+      .gallery {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .memory-item {
+        width: 250px;
+        height: 300px;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        transition: 0.4s;
+        position: relative;
+      }
+
+      .memory-item video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.6;
+        transition:
+          opacity 0.5s ease,
+          transform 0.5s ease;
+      }
+
+      .memory-item:hover {
+        transform: scale(1.08);
+      }
+
+      .memory-item:hover video {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+
+      /* Final Page */
+      .final h1 {
+        font-family: "Dancing Script", cursive;
+        font-size: 4rem;
+        animation: glow 2s infinite alternate;
+      }
+
+      @keyframes glow {
+        from {
+          text-shadow: 0 0 10px #fff;
+        }
+        to {
+          text-shadow: 0 0 30px #ff4d6d;
+        }
+      }
+
+      /* Popup */
+      .popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .popup-content {
+        background: white;
+        color: #ee9ca7;
+        padding: 40px;
+        border-radius: 20px;
+        text-align: center;
+        max-width: 400px;
+      }
+
+      .popup-content h2 {
+        font-family: "Dancing Script", cursive;
+        font-size: 2.5rem;
+      }
+
+      .popup-kiss {
+        font-size: 80px;
+        margin-top: 20px;
+        animation: popupBoom 0.8s ease infinite alternate;
+      }
+
+      @keyframes popupBoom {
+        from {
+          transform: scale(1);
+        }
+        to {
+          transform: scale(1.4);
+        }
+      }
+
+      .popup-content button {
+        margin-top: 20px;
+        padding: 8px 20px;
+        border: none;
+        background: #ee9ca7;
+        color: white;
+        border-radius: 20px;
+        cursor: pointer;
+      }
+
+      /* Flying Kisses */
+      .flying-kiss {
+        position: fixed;
+        font-size: 30px;
+        animation: explode 1.5s ease forwards;
+        pointer-events: none;
+      }
+
+      @keyframes explode {
+        0% {
+          transform: translate(0, 0);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(var(--x), var(--y)) scale(2);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Music (Plays after first button click) -->
+    <audio id="bgMusic" loop>
+      <source src="I Love You Bodyguard 128 Kbps.mp3" type="audio/mp3" />
+    </audio>
+
+    <!-- Hero -->
+    <section class="hero">
+      <h1>My Love ❤️</h1>
+      <p>
+        You are the most beautiful part of my life. Every heartbeat whispers
+        your name.
+      </p>
+      <button class="btn" onclick="startExperience()">Open My Heart 💌</button>
+    </section>
+
+    <!-- Love Letter -->
+    <section id="letter">
+      <div class="letter">
+        <h2>To My Love</h2>
+        <p>
+          My Love, From the moment you came into my life, everything became
+          softer, brighter, and more meaningful. Your smile feels like home,
+          your voice feels like peace, and your hugs feel like the safest place
+          in the world. I don't just love you… I admire you, I cherish you, and
+          I am thankful for you every single day. You are my today and all of my
+          tomorrows.
+        </p>
+        <p
+          style="
+            margin-top: 20px;
+            font-family: &quot;Dancing Script&quot;;
+            font-size: 1.8rem;
+          "
+        >
+          Forever Yours, Your Girl 🤍
+        </p>
+      </div>
+    </section>
+
+    <!-- Memories (Videos Only) -->
+    <section>
+      <h2
+        style="
+          font-family: &quot;Dancing Script&quot;;
+          font-size: 3rem;
+          margin-bottom: 30px;
+        "
+      >
+        Our Sweet Memories 📸
+      </h2>
+
+      <div class="gallery">
+        <div class="memory-item">
+          <video muted loop>
+            <source src="v1.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <div class="memory-item">
+          <video muted loop>
+            <source src="v2.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <div class="memory-item">
+          <video muted loop>
+            <source src="v5.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <div class="memory-item">
+          <video muted loop>
+            <source src="v4.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <div class="memory-item">
+          <video muted loop>
+            <source src="v3.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final -->
+    <section class="final">
+      <h1>I Love You My Love ❤️</h1>
+      <p style="margin-top: 20px; font-size: 1.2rem">
+        No matter what happens, it will always be you and me.
+      </p>
+      <button class="btn" onclick="showKiss()">Click For A Surprise 💋</button>
+    </section>
+
+    <!-- Popup -->
+    <div id="kissPopup" class="popup">
+      <div class="popup-content">
+        <h2>Happy Kiss Day 💋</h2>
+        <p>
+          I wish I was with you right now... sending you a thousand kisses 😘
+        </p>
+        <div class="popup-kiss">💋</div>
+        <button onclick="closeKiss()">Close</button>
+      </div>
+    </div>
+
+    <script>
+      /* Floating Hearts */
+      function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = 5 + Math.random() * 5 + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 8000);
+      }
+      setInterval(createHeart, 500);
+
+      /* Start music on first button click */
+      function startExperience() {
+        document.getElementById("bgMusic").play();
+        document.getElementById("letter").scrollIntoView();
+      }
+
+      /* Smooth hover video play */
+      document.querySelectorAll("video").forEach((video) => {
+        video.addEventListener("mouseenter", () => {
+          video.currentTime = 0;
+          video.play();
+        });
+        video.addEventListener("mouseleave", () => {
+          video.pause();
+        });
+      });
+
+      /* Popup + Explosion */
+      function showKiss() {
+        document.getElementById("kissPopup").style.display = "flex";
+        for (let i = 0; i < 25; i++) {
+          const kiss = document.createElement("div");
+          kiss.classList.add("flying-kiss");
+          kiss.innerHTML = "💋";
+          kiss.style.left = "50%";
+          kiss.style.top = "50%";
+          kiss.style.setProperty("--x", (Math.random() - 0.5) * 700 + "px");
+          kiss.style.setProperty("--y", (Math.random() - 0.5) * 700 + "px");
+          document.body.appendChild(kiss);
+          setTimeout(() => kiss.remove(), 1500);
+        }
+      }
+
+      function closeKiss() {
+        document.getElementById("kissPopup").style.display = "none";
+      }
+    </script>
+  </body>
+</html>

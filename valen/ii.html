@@ -1,0 +1,1753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Love 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
+
+/* body{
+  font-family:'Poppins',sans-serif;
+  background:#ffe6eb;
+  overflow:hidden;
+} */
+
+body{
+  font-family:'Poppins',sans-serif;
+  overflow:hidden;
+
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,182,193,0.25), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(255,105,180,0.2), transparent 40%),
+    radial-gradient(circle at 50% 90%, rgba(255,192,203,0.25), transparent 40%),
+    #ffffff;
+}
+
+/* ---------------- LOCK PAGE ---------------- */
+
+#lockPage{
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#fff0f5;
+  z-index:1000;
+  perspective:1200px;
+}
+
+.lock-card{
+  background:white;
+  width:320px;
+  padding:30px;
+  border-radius:25px;
+  box-shadow:0 15px 40px rgba(255,105,135,0.25);
+  text-align:center;
+  transform-origin:left;
+  transition:1s ease;
+}
+
+.lock-card.close{
+  transform:rotateY(-100deg);
+  opacity:0;
+}
+
+.lock-card h2{
+  font-family:'Dancing Script',cursive;
+  color:#ff4d88;
+}
+
+.dots{
+  font-size:22px;
+  letter-spacing:6px;
+  margin:15px 0;
+  color:#ff4d88;
+  height:25px;
+}
+
+.keypad{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+  margin-top:10px;
+}
+
+.key{
+  padding:12px;
+  border-radius:12px;
+  background:#fff0f5;
+  cursor:pointer;
+}
+
+.unlock-btn{
+  margin-top:20px;
+  padding:10px;
+  border:none;
+  border-radius:20px;
+  background:#ff4d88;
+  color:white;
+  width:100%;
+  cursor:pointer;
+}
+
+/* ---------------- MAIN CONTENT ---------------- */
+
+#mainContent{
+  display:none;
+  opacity:0;
+  transform:scale(1.05);
+  transition:1.2s ease;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+#mainContent.show{
+  opacity:1;
+  transform:scale(1);
+}
+
+/* HERO */
+
+.hero{
+  position:relative;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+
+.bg-image{
+  position:absolute;
+  inset:0;
+  background:url('bg.png') center/cover no-repeat;
+  filter:blur(8px) brightness(0.6);
+  transform:scale(1.1);
+}
+
+.valentine-card{
+  position:relative;
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(15px);
+  padding:50px 40px;
+  border-radius:30px;
+  text-align:center;
+  width:90%;
+  max-width:600px;
+  box-shadow:0 20px 60px rgba(255,105,135,0.4);
+  border:1px solid rgba(255,255,255,0.3);
+  animation:fadeUp 1.5s ease forwards;
+  opacity:0;
+}
+
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(40px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+.top-text{
+  font-family:'Dancing Script',cursive;
+  font-size:1.3rem;
+  color:#fff;
+}
+
+.valentine-card h1{
+  font-family:'Dancing Script',cursive;
+  font-size:3.5rem;
+  margin:10px 0;
+  color:#fff;
+}
+
+.quote{
+  font-style:italic;
+  color:#fff;
+  margin-bottom:20px;
+}
+
+.love-btn{
+  padding:12px 30px;
+  border-radius:30px;
+  border:none;
+  background:rgba(255,255,255,0.3);
+  color:#fff;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.love-btn:hover{
+  background:#ff4d88;
+}
+
+/* ---------------- ENVELOPE ---------------- */
+
+.envelope-section{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#ffd6e0;
+}
+
+.envelope-wrapper{
+  transition:0.8s ease;
+}
+
+.envelope-wrapper.zoom{
+  transform:scale(1.2);
+}
+
+.envelope{
+  width:220px;
+  height:140px;
+  background:#ff4d88;
+  position:relative;
+  border-radius:10px;
+  cursor:pointer;
+  animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
+}
+
+.flap{
+  position:absolute;
+  top:0;
+  width:0;
+  height:0;
+  border-left:110px solid transparent;
+  border-right:110px solid transparent;
+  border-top:80px solid #ff6f9f;
+  transform-origin:top;
+  transition:0.6s ease;
+}
+
+.envelope.open .flap{
+  transform:rotateX(180deg);
+}
+
+.heart-seal{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size:28px;
+  color:gold;
+}
+
+/* ---------------- LETTER ---------------- */
+
+.letter-card{
+  position:fixed;
+  inset:0;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  background:rgba(0,0,0,0.3);
+}
+
+.letter-box{
+  background:white;
+  width:90%;
+  max-width:600px;
+  padding:40px;
+  border-radius:25px;
+  transform:scale(0.7);
+  opacity:0;
+  transition:0.6s ease;
+}
+
+.letter-card.show .letter-box{
+  transform:scale(1);
+  opacity:1;
+}
+
+/* ---------------- STORY ANIMATION ---------------- */
+
+.story-section{
+  padding:120px 20px;
+  background:#fff;
+  text-align:center;
+}
+
+.story-title{
+  font-family: 'Great Vibes', cursive;
+  font-size: 52px;
+  font-weight: normal;
+  color: #444;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+
+.timeline-item{
+  position:relative;
+  width:50%;
+  padding:30px 40px;
+  opacity:0;
+  transform:scale(0.6) translateY(100px);
+  filter:blur(10px);
+  transition:1.2s cubic-bezier(.19,1,.22,1);
+}
+
+.timeline-item.show{
+  opacity:1;
+  transform:scale(1) translateY(0);
+  filter:blur(0);
+}
+
+.timeline-item.left{ left:0; text-align:right; }
+.timeline-item.right{ left:50%; }
+
+.timeline{
+  position:relative;
+  max-width:900px;
+  margin:auto;
+}
+
+.timeline::after{
+  content:'';
+  position:absolute;
+  width:2px;
+  background:#ffc2d1;
+  top:0;
+  bottom:0;
+  left:50%;
+}
+
+.timeline-item .content{
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.08);
+  transition:0.4s ease;
+}
+
+/* Hover effect */
+/* .timeline-item .content:hover{
+  transform:translateY(-8px);
+  box-shadow:0 20px 50px rgba(0,0,0,0.15);
+} */
+
+.timeline-item .content:hover{
+  transform:translateY(-10px);
+  box-shadow:0 25px 60px rgba(255,77,136,0.35);
+  border:1px solid #ff4d88;
+  background:linear-gradient(135deg, #fff, #fff0f5);
+}
+
+
+
+/* -------- MEMORY SECTION -------- */
+
+.memory-section{
+  padding:120px 20px;
+  background:#fff;
+  text-align:center;
+}
+
+.memory-title{
+  font-family:'Dancing Script',cursive;
+  font-size:48px;
+  color:#888;
+  margin-bottom:10px;
+}
+
+.memory-sub{
+  color:#aaa;
+  margin-bottom:60px;
+}
+
+/* Grid layout */
+
+.memory-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:40px;
+  max-width:1100px;
+  margin:auto;
+}
+
+/* Flip card */
+
+/* .flip-card{
+  perspective:1200px;
+} */
+
+.flip-card{
+  perspective:1400px;
+  transition:0.6s ease;
+}
+
+/* Random tilt positions */
+.flip-card:nth-child(1){ transform:rotate(-4deg); }
+.flip-card:nth-child(2){ transform:rotate(3deg); }
+.flip-card:nth-child(3){ transform:rotate(-2deg); }
+.flip-card:nth-child(4){ transform:rotate(2deg); }
+.flip-card:nth-child(5){ transform:rotate(-3deg); }
+.flip-card:nth-child(6){ transform:rotate(4deg); }
+
+/* .flip-inner{
+  position:relative;
+  width:100%;
+  height:300px;
+  transform-style:preserve-3d;
+  transition:0.8s cubic-bezier(.19,1,.22,1);
+} */
+
+.flip-inner{
+  position:relative;
+  width:100%;
+  height:320px;
+
+  transform-style:preserve-3d;
+  transition:1.4s cubic-bezier(.19,1,.22,1);
+}
+
+
+/* .flip-card:hover .flip-inner{
+  transform:rotateY(180deg);
+} */
+
+.flip-card:hover .flip-inner{
+  transform:rotateY(180deg) scale(1.02);
+}
+
+
+.flip-front,
+.flip-back{
+  position:absolute;
+  width:100%;
+  height:100%;
+  backface-visibility:hidden;
+  border-radius:20px;
+  overflow:hidden;
+  /* box-shadow:0 15px 40px rgba(255,105,180,0.2); */
+   box-shadow:0 25px 60px rgba(255,105,180,0.25);
+  transition:0.6s ease;
+
+}
+
+/* Front side */
+
+.flip-front img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.flip-front p{
+  position:absolute;
+  bottom:10px;
+  left:0;
+  right:0;
+  background:rgba(0,0,0,0.5);
+  color:white;
+  padding:5px;
+  font-size:14px;
+}
+
+/* Back side */
+
+.flip-back{
+  background:#ff4d88;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  transform:rotateY(180deg);
+  font-size:16px;
+  line-height:1.6;
+}
+
+/* Responsive */
+
+@media(max-width:900px){
+  .memory-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:600px){
+  .memory-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+/* -------- WHY I LOVE YOU -------- */
+
+.love-reason-section{
+  padding:150px 20px;
+  text-align:center;
+  position:relative;
+}
+
+.love-title{
+  font-family:'Dancing Script',cursive;
+  font-size:48px;
+  color:#444;
+  margin-bottom:10px;
+}
+
+.love-sub{
+  color:#777;
+  margin-bottom:40px;
+}
+
+/* Message popup */
+
+.love-message{
+  max-width:600px;
+  margin:0 auto 30px;
+  background:white;
+  padding:20px 30px;
+  border-radius:15px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.08);
+  opacity:0;
+  transform:translateY(20px) scale(0.95);
+  transition:0.6s ease;
+  font-size:18px;
+  font-style:italic;
+}
+
+.love-message.show{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+
+/* Button */
+
+.love-click-btn{
+  background:#e63946;
+  color:white;
+  border:none;
+  padding:15px 40px;
+  border-radius:30px;
+  font-size:16px;
+  cursor:pointer;
+  box-shadow:0 8px 20px rgba(230,57,70,0.4);
+  transition:0.3s ease;
+}
+
+.love-click-btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 30px rgba(230,57,70,0.5);
+}
+
+/* -------- OPEN WHEN SECTION -------- */
+
+.open-when-section{
+  padding:150px 20px;
+  text-align:center;
+}
+
+.mail-icon{
+  font-size:28px;
+  margin-bottom:10px;
+}
+
+.open-title{
+  font-family:'Dancing Script',cursive;
+  font-size:48px;
+  color:#444;
+}
+
+.open-sub{
+  color:#777;
+  margin-bottom:60px;
+}
+
+.open-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:30px;
+  max-width:1100px;
+  margin:auto;
+}
+
+/* Letter style box */
+
+.open-card{
+  border:2px dashed #ccc;
+  padding:30px 20px;
+  border-radius:10px;
+  background:white;
+  cursor:pointer;
+  transition:0.4s ease;
+}
+
+.open-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 15px 40px rgba(0,0,0,0.08);
+}
+
+.to-love{
+  font-size:12px;
+  color:#999;
+}
+
+.open-card h3{
+  font-family:'Dancing Script',cursive;
+  margin:10px 0 20px;
+  font-size:22px;
+}
+
+.open-card button{
+  padding:6px 15px;
+  border:1px solid #444;
+  background:white;
+  font-size:12px;
+  cursor:pointer;
+}
+
+
+/* -------- POPUP FIXED VERSION -------- */
+
+.open-popup{
+  position:fixed;
+  inset:0;
+  background:rgba(255,255,255,0.6);
+  backdrop-filter:blur(10px);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:9999; /* VERY IMPORTANT */
+}
+
+.popup-box{
+  position:relative;
+  background:white;
+  width:90%;
+  max-width:450px;
+  padding:40px;
+  border-radius:20px;
+  box-shadow:0 25px 60px rgba(0,0,0,0.15);
+  text-align:center;
+
+  transform:scale(0.6);
+  opacity:0;
+  transition:0.5s ease;
+}
+
+.open-popup.active .popup-box{
+  transform:scale(1);
+  opacity:1;
+}
+
+.close-btn{
+  position:absolute;
+  top:15px;
+  right:20px;
+  font-size:20px;
+  cursor:pointer;
+}
+
+
+.signature{
+  margin-top:20px;
+  font-family:'Dancing Script',cursive;
+  color:#e63946;
+}
+
+@media(max-width:900px){
+  .open-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:500px){
+  .open-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+/* -------- FUTURE SECTION -------- */
+
+.future-section{
+  padding:150px 20px;
+  text-align:center;
+  background:linear-gradient(135deg,#4b0f1e,#2c0610);
+  color:white;
+}
+
+.count-title{
+  font-family:'Dancing Script',cursive;
+  font-size:42px;
+  margin-bottom:40px;
+}
+
+.countdown{
+  display:flex;
+  justify-content:center;
+  gap:50px;
+  margin-bottom:80px;
+  flex-wrap:wrap;
+}
+
+.time-box span{
+  font-size:60px;
+  font-weight:bold;
+  letter-spacing:2px;
+}
+
+.time-box p{
+  font-size:12px;
+  letter-spacing:2px;
+  opacity:0.7;
+}
+
+.future-title{
+  font-family:'Playfair Display', serif;
+  font-size:42px;
+  font-weight:700;
+  color:#fff;
+  margin-bottom:40px;
+  letter-spacing:1px;
+  text-transform:capitalize;
+}
+
+.future-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:25px;
+  max-width:1000px;
+  margin:auto;
+}
+
+.future-card{
+  background:rgba(255,255,255,0.08);
+  padding:20px;
+  border-radius:8px;
+  backdrop-filter:blur(8px);
+  transition:0.4s ease;
+  font-size:14px;
+}
+
+.future-card:hover{
+  background:rgba(255,255,255,0.15);
+  transform:translateY(-5px);
+}
+
+@media(max-width:900px){
+  .future-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:600px){
+  .future-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+/* -------- PROPOSAL SECTION -------- */
+
+.proposal-section{
+  padding:150px 20px;
+  text-align:center;
+  background:white;
+}
+
+.proposal-title{
+  font-family:'Dancing Script',cursive;
+  font-size:42px;
+  margin-bottom:10px;
+}
+
+.proposal-sub{
+  color:#777;
+  margin-bottom:30px;
+}
+
+.proposal-box{
+  width:300px;
+  margin:30px auto;
+  background:#f8f8f8;
+  padding:20px;
+  border-radius:20px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.1);
+}
+
+.proposal-box img{
+  width:100%;
+  border-radius:15px;
+}
+
+.proposal-buttons{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  margin-top:20px;
+}
+
+.no-btn{
+  background:#ddd;
+  border:none;
+  padding:12px 30px;
+  border-radius:30px;
+  cursor:pointer;
+    transition:0.5s ease;
+}
+
+.yes-btn{
+  background:#ff4d88;
+  color:white;
+  border:none;
+  padding:12px 30px;
+  border-radius:30px;
+  cursor:pointer;
+  transition:0.3s ease;
+}
+
+.yes-btn:hover{
+  transform:scale(1.1);
+}
+
+/* 🔐 Wrong password shake animation */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+  100% { transform: translateX(0); }
+}
+
+.lock-card.shake {
+  animation: shake 0.4s ease;
+}
+
+/* 💖 Heart Bloom Effect */
+
+.bloom-heart{
+  position: absolute;
+  font-size: 22px;
+  pointer-events: none;
+  animation: bloomMove 1.4s ease-out forwards;
+  z-index: 1;
+}
+
+@keyframes bloomMove{
+  0%{
+    opacity:1;
+    transform: translate(0,0) scale(0.5);
+  }
+  100%{
+    opacity:0;
+    transform: translate(var(--x), var(--y)) scale(1.4);
+  }
+}
+
+/* Ensure card stays above bloom */
+.valentine-card{
+  position: relative;
+  z-index: 2;
+}
+
+.letter-box h2{
+  font-family:'Dancing Script', cursive;
+  font-size:38px;
+  color:#ff4d88;
+  margin-bottom:20px;
+}
+
+.letter-sign{
+  margin-top:30px;
+  text-align:right;
+  font-family:'Dancing Script', cursive;
+  font-size:22px;
+  color:#ff4d88;
+}
+
+.letter-heading{
+  font-family:'Dancing Script',cursive;
+  font-size:36px;
+  margin-bottom:25px;
+  color:#e63946;
+}
+
+.letter-content{
+  font-size:16px;
+  line-height:1.9;
+  text-align:left;
+}
+
+.letter-sign{
+  margin-top:30px;
+  text-align:right;
+  font-family:'Dancing Script',cursive;
+  font-size:22px;
+  color:#e63946;
+}
+
+.clear-btn{
+  font-size:18px;
+  width:28px;
+  height:28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:#ffe6eb;
+  color:#ff4d88;
+  cursor:pointer;
+  transition:0.3s ease;
+}
+
+.clear-btn:hover{
+  background:#ff4d88;
+  color:white;
+  transform:scale(1.1);
+}
+
+
+</style>
+</head>
+<body>
+
+    <audio id="bgMusic" src="Love_me_like_you_do_-_love_me_like_you_do_(mp3.pm).mp3"></audio>
+
+<!-- LOCK PAGE -->
+<div id="lockPage">
+  <div class="lock-card" id="lockCard">
+    <h2>SweetHeart 💗</h2>
+    <p style="font-size:12px;color:#999;">ENTER SECRET DATE</p>
+    <!-- <div class="dots" id="dots"></div> -->
+     <div style="display:flex; justify-content:center; align-items:center; gap:10px;">
+  <div class="dots" id="dots"></div>
+  <div class="clear-btn" onclick="clearInput()">✕</div>
+</div>
+
+
+    <div class="keypad">
+      <div class="key" onclick="press(1)">1</div>
+      <div class="key" onclick="press(2)">2</div>
+      <div class="key" onclick="press(3)">3</div>
+      <div class="key" onclick="press(4)">4</div>
+      <div class="key" onclick="press(5)">5</div>
+      <div class="key" onclick="press(6)">6</div>
+      <div class="key" onclick="press(7)">7</div>
+      <div class="key" onclick="press(8)">8</div>
+      <div class="key" onclick="press(9)">9</div>
+      <div></div>
+      <div class="key" onclick="press(0)">0</div>
+      <div></div>
+    </div>
+
+    <button class="unlock-btn" onclick="unlock()">UNLOCK GIFT</button>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="mainContent">
+
+<section class="hero">
+  <div class="bg-image"></div>
+  <div class="valentine-card">
+    <p class="top-text">🌸 Happy Valentine’s Day 🌸</p>
+    <h1>My Love</h1>
+    <p class="quote">"My heart beats only for you."</p>
+    <button class="love-btn" onclick="heartBloom(); scrollToEnvelope();">Shower me with Love 🤍</button>
+  </div>
+</section>
+
+<section class="envelope-section" id="envelopeSection">
+  <div class="envelope-wrapper" id="envWrap">
+    <div class="envelope" id="envelope" onclick="openEnvelope()">
+      <div class="flap"></div>
+      <div class="heart-seal">💛</div>
+    </div>
+  </div>
+</section>
+
+<section class="story-section">
+  <h2 class="story-title">Our Story</h2>
+  <p class="story-sub">How it all began...</p>
+
+  <div class="timeline">
+    <div class="timeline-item left">
+      <div class="content">
+        <div class="date">14 feb 2025</div>
+        <h3>🌸 Our First Unoffical Date</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta quod cupiditate sit, 
+          voluptates eaque iure impedit veniam debitis, delectus sunt, 
+          reiciendis esse sapiente nam inventore magni hic a aspernatur neque! ❤️</p>
+      </div>
+    </div>
+
+    <div class="timeline-item right">
+      <div class="content">
+        <div class="date">14 mar 2025</div>
+        <h3>💖 The Picture</h3>
+        <p>💖Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis nesciunt 
+          incidunt alias! Quisquam, rem non? Blanditiis illum hic corporis impedit beatae at sit, 
+          necessitatibus laboriosam doloribus fugit ut commodi iste! ✨</p>
+      </div>
+    </div>
+
+    <div class="timeline-item left">
+      <div class="content">
+        <div class="date">26 mar 2025</div>
+        <h3>❤️ First Hug</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error maiores
+           assumenda ducimus perspiciatis itaque quos dolor mollitia unde quas. Placeat officia facere quidem, 
+          ab animi reiciendis quia tempore voluptatum deserunt.</p>
+      </div>
+    </div>
+
+   <div class="timeline-item right">
+  <div class="content">
+    <div class="date">14 Apr 2025</div>
+    <h3>🌹 God Approval</h3>
+    <p>
+     Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero recusandae fugiat 
+     accusamus modi corporis veritatis nemo quo, qui libero voluptate voluptatum, eius 
+     nulla, minus iste eos dolorum laborum quia sint. ❤️✨ </p>
+  </div>
+</div>
+
+ <div class="timeline-item left">
+  <div class="content">
+    <div class="date">19 Apr 2025</div>
+    <h3>🌹 My Heart Choose You</h3>
+    <p>
+     Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      Quidem excepturi, tenetur delectus similique voluptatem voluptates
+       deserunt reiciendis sint? Natus dignissimos ab rem vitae praesentium 
+       earum voluptatibus animi, nesciunt porro minima. ✨💕
+    </p>
+  </div>
+</div>
+
+ <div class="timeline-item right">
+  <div class="content">
+    <div class="date">1 May 2025</div>
+    <h3>🌹 A Special Day</h3>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+       Vel ex sed sunt dicta consectetur at asperiores perspiciatis 
+       commodi laborum nulla fugiat velit repellendus eos eum itaque 
+       ab obcaecati, eaque laboriosam.
+    </p>
+  </div>
+</div>
+
+  </div>
+</section>
+
+<section class="memory-section">
+
+  <h2 class="memory-title">Captured Moments</h2>
+  <p class="memory-sub">Every picture tells a story of us...</p>
+
+  <div class="memory-grid">
+
+    <!-- Card 1 -->
+    <div class="flip-card">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <img src="1.png" alt="">
+          <p>Memory #1</p>
+        </div>
+        <div class="flip-back">
+          <p>That day when your smile made everything brighter 💕 <br>
+             Every time you hold my hand, I’m reminded that destiny was always on our side.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="flip-card">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <img src="sam1.png" alt="">
+          <p>Memory #2</p>
+        </div>
+        <div class="flip-back">
+          <p>The laughter we shared still echoes in my heart ✨<br>
+             If I had to live a thousand lives, I would still find you and choose you in every single one.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="flip-card">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <img src="ss.png" alt="">
+          <p>Memory #3</p>
+        </div>
+        <div class="flip-back">
+          <p>Every little moment with you feels magical 🌸<br>
+        You are not just my love, you are my answered prayer.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="flip-card">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <img src="2.png" alt="">
+          <p>Memory #4</p>
+        </div>
+        <div class="flip-back">
+          <p>Even silence with you feels like peace 💖<br>
+        Loving you feels like coming home — safe, warm, and exactly where I belong.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="flip-card">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <img src="sss.png" alt="">
+          <p>Memory #5</p>
+        </div>
+        <div class="flip-back">
+          <p>You are my favorite place to be 🌹<br>
+        With you, even the simplest moments turn into memories my heart never wants to forget. 💕</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="flip-card">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <img src="s.png" alt="">
+          <p>Memory #6</p>
+        </div>
+        <div class="flip-back">
+          <p>With you, forever doesn’t feel long enough 💌<br>
+        From the moment my heart chose you, I knew my forever had a name.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="love-reason-section">
+
+  <h2 class="love-title">Why I Love You</h2>
+  <p class="love-sub">Click below to find out.</p>
+
+  <div class="love-message" id="loveMessage"></div>
+
+  <button class="love-click-btn" onclick="showLove()">
+    ❤️ Click to Feel Loved
+  </button>
+
+</section>
+
+<section class="open-when-section">
+
+  <div class="mail-icon">✉️</div>
+  <h2 class="open-title">Open When...</h2>
+  <p class="open-sub">Little reminders of my love for every mood ❤️</p>
+
+  <div class="open-grid">
+
+    <div class="open-card" onclick="openLetter('miss')">
+      <p class="to-love">To My Love</p>
+      <h3>You Miss Me</h3>
+      <button>OPEN WHEN</button>
+    </div>
+
+    <div class="open-card" onclick="openLetter('sad')">
+      <p class="to-love">To My Love</p>
+      <h3>You're Sad</h3>
+      <button>OPEN WHEN</button>
+    </div>
+
+    <div class="open-card" onclick="openLetter('happy')">
+      <p class="to-love">To My Love</p>
+      <h3>You're Happy</h3>
+      <button>OPEN WHEN</button>
+    </div>
+
+    <div class="open-card" onclick="openLetter('sleep')">
+      <p class="to-love">To My Love</p>
+      <h3>You Can't Sleep</h3>
+      <button>OPEN WHEN</button>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="future-section">
+
+  <h2 class="count-title">Countdown to Our Special Day </h2>
+
+  <div class="countdown">
+    <div class="time-box">
+      <span id="days">00</span>
+      <p>DAYS</p>
+    </div>
+    <div class="time-box">
+      <span id="hours">00</span>
+      <p>HOURS</p>
+    </div>
+    <div class="time-box">
+      <span id="minutes">00</span>
+      <p>MINS</p>
+    </div>
+    <div class="time-box">
+      <span id="seconds">00</span>
+      <p>SEC</p>
+    </div>
+  </div>
+
+  <h3 class="future-title">OUR FUTURE PLANS</h3>
+
+  <!-- <div class="future-grid">
+    <div class="future-card">✨ Travel to a new city together and get lost on purpose.</div>
+    <div class="future-card">✨ Build a home filled with laughter, love, and late-night talks.</div>
+    <div class="future-card">✨ Grow old together, still holding hands and teasing each other.</div>
+    <div class="future-card">✨ Watch sunsets in silence, together.</div>
+  </div> -->
+
+  <div class="future-grid">
+
+  <div class="future-card">
+    ✨ <strong>Temple Visit Together Every Year 🙏</strong><br><br>
+    Har saal ek baar kisi special mandir (maybe phir se Rameshwaram) jaakar thank you bolna — for keeping our love safe and blessed.
+  </div>
+
+  <div class="future-card">
+    🌊 <strong>Beach Anniversary Tradition 🌕</strong><br><br>
+    Har anniversary pe beach date — same full moon vibes, barefoot walk, aur har saal ek naya shell collect karna as a memory.
+  </div>
+
+  <div class="future-card">
+    ✈️ <strong>Travel Bucket List Together</strong><br><br>
+    Ek list banana — Goa sunset, Udaipur palace stay, Manali snowfall — aur har saal ek jagah tick karna.
+  </div>
+
+  <div class="future-card">
+    🤍 <strong>“No Matter What” Promise Rule</strong><br><br>
+    Chahe fight ho ya misunderstanding, rule yeh hoga — “We solve it the same day, never sleep upset.”
+  </div>
+
+  <div class="future-card">
+    🏡 <strong>Dream Home Vision</strong><br><br>
+    Ek cozy sa ghar — balcony with plants, soft lights, aur ek corner sirf hum dono ki coffee talks ke liye.
+  </div>
+
+  <div class="future-card">
+    💫 <strong>Grow Together, Not Just Old Together</strong><br><br>
+    Career goals, health goals, spiritual growth — ek dusre ko push karna, support karna, aur har success celebrate karna.
+  </div>
+
+</div>
+
+
+</section>
+
+<section class="proposal-section">
+
+  <h2 class="proposal-title" id="proposalTitle">
+    Will you be my Valentine? 🌹
+  </h2>
+
+  <p class="proposal-sub" id="proposalSub"></p>
+
+  <div class="proposal-box">
+    <img id="proposalImage" 
+         src="I Love You Heart GIF by BEARISH.gif" 
+         alt="bear">
+  </div>
+
+  <div class="proposal-buttons" id="proposalButtons">
+    <!-- <button class="no-btn" onclick="handleNo()">No 🥲</button> -->
+     <button class="no-btn" id="noButton" onclick="handleNo()">No 🥲</button>
+    <button class="yes-btn" onclick="handleYes()">Yes! 💖</button>
+  </div>
+
+</section>
+
+
+</div>
+
+<!-- POPUP LETTER -->
+<!-- <div class="open-popup" id="openPopup">
+  <div class="popup-box">
+    <span class="close-btn" onclick="closeLetter()">×</span>
+    <h4>My Dearest,</h4>
+    <p id="popupMessage"></p>
+    <div class="signature">With all my love,<br>Your Valentine ❤️</div>
+  </div>
+</div> -->
+
+<!-- OPEN WHEN POPUP -->
+<div class="open-popup" id="openPopup">
+  <div class="popup-box">
+    <span class="close-btn" id="closePopup">×</span>
+    <h4>My Love,</h4>
+    <p id="popupMessage"></p>
+    <div class="signature">
+      With all my love,<br>
+      Your Peace ❤️
+    </div>
+  </div>
+</div>
+
+<!-- LETTER -->
+<!-- <div class="letter-card" id="letterCard">
+  <div class="letter-box">
+    <h2>To My Love 💗</h2>
+    <p>My Love, from the moment you entered my life, everything became brighter and meaningful...</p>
+  </div>
+</div> -->
+
+<!-- <div class="letter-card" id="letterCard">
+  <div class="letter-box">
+    <h2>To My Forever 💌</h2>
+
+    <p>
+      My love,
+      <br><br>
+      From the moment you stepped into my life, something inside me quietly shifted. 
+      The world felt softer, brighter, and somehow more meaningful. 
+      You didn’t just become a part of my days — you became the best part of them.
+      <br><br>
+      I love the way you care without even trying, the way your smile can fix everything,
+      and how your presence alone makes my heart feel calm and safe.
+      With you, even the simplest moments turn into memories I never want to forget.
+      <br><br>
+      You are my comfort, my happiness, my peace, and my biggest blessing.
+      I promise to choose you in every lifetime, in every version of this universe.
+      <br><br>
+      No matter what happens, my heart will always belong to you.
+    </p>
+
+    <div class="letter-sign">
+      From,<br>
+      Your Aditi ❤️
+    </div>
+  </div>
+</div> -->
+
+<div class="letter-card" id="letterCard">
+  <div class="letter-box">
+
+    <h2 class="letter-heading">To My Perfect Match 💌</h2>
+
+    <div class="letter-content">
+      <p>
+        My dearest,
+        <br>
+        Sometimes I pause and think about us — how two different journeys somehow met at the right time.
+        And every time, my heart says the same thing… you are my perfect match.
+        <br>
+        Even miles apart, you’ve never felt distant. Every late-night call, every laugh,
+        every small memory we’ve created is safely etched in my heart.
+        Distance hasn’t weakened us — it has made our bond stronger.
+        <br>
+        You are my calm in chaos, my safe place, my quiet strength.
+        On the days I miss you the most, I close my eyes and feel your warmth,
+        and suddenly everything feels okay again.
+        <br>
+        Maybe our love story is meant to be extraordinary.
+        Maybe that’s why it’s built on patience, trust, and pure emotion.
+        <br>
+        No matter how far life takes us, my heart will always choose you —
+        today, tomorrow, and every lifetime after.
+      </p>
+
+      <div class="letter-sign">
+        From, <br>
+          Your Aditi ❤️
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<script>
+let input="";
+const correctPassword="010525";
+
+function clearInput(){
+  input = "";
+  document.getElementById("dots").innerText = "";
+}
+
+
+function press(num){
+  if(input.length<6){
+    input+=num;
+    document.getElementById("dots").innerText="• ".repeat(input.length);
+  }
+}
+
+// function unlock(){
+//   if(input===correctPassword){
+//     document.getElementById("lockCard").classList.add("close");
+//     setTimeout(()=>{
+//       document.getElementById("lockPage").style.display="none";
+//       const main=document.getElementById("mainContent");
+//       main.style.display="block";
+//       setTimeout(()=>main.classList.add("show"),50);
+//       document.body.style.overflow="auto";
+//     },900);
+//   }else{
+//     alert("Wrong Secret Date 💔");
+//     input="";
+//     document.getElementById("dots").innerText="";
+//   }
+// }
+
+function unlock(){
+  const lockCard = document.getElementById("lockCard");
+
+  if(input === correctPassword){
+
+    lockCard.classList.remove("shake"); // remove shake if any
+    lockCard.classList.add("close");
+
+    setTimeout(()=>{
+      document.getElementById("lockPage").style.display="none";
+      const main=document.getElementById("mainContent");
+      main.style.display="block";
+      setTimeout(()=>main.classList.add("show"),50);
+      document.body.style.overflow="auto";
+      const music = document.getElementById("bgMusic");
+        music.play();
+    },900);
+
+  }else{
+
+    // 💔 Shake effect
+    lockCard.classList.remove("shake");
+    void lockCard.offsetWidth; // restart animation trick
+    lockCard.classList.add("shake");
+
+    input="";
+    document.getElementById("dots").innerText="";
+  }
+}
+
+// function heroHeartBlast(){
+
+//   const card = document.querySelector(".valentine-card");
+//   const rect = card.getBoundingClientRect();
+
+//   for(let i = 0; i < 25; i++){
+
+//     const heart = document.createElement("div");
+//     heart.innerHTML = "💖";
+//     heart.className = "hero-heart";
+
+//     heart.style.left = rect.left + Math.random()*rect.width + "px";
+//     heart.style.top = rect.top + rect.height/2 + "px";
+
+//     document.body.appendChild(heart);
+
+//     setTimeout(()=>{
+//       heart.remove();
+//     },2000);
+//   }
+// }
+
+function heartBloom(){
+
+  const card = document.querySelector(".valentine-card");
+  const rect = card.getBoundingClientRect();
+
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
+
+  const hearts = 30;
+
+  for(let i = 0; i < hearts; i++){
+
+    const heart = document.createElement("div");
+    heart.innerHTML = "💖";
+    heart.className = "bloom-heart";
+
+    // Random angle
+    const angle = Math.random() * 2 * Math.PI;
+    const radius = 120 + Math.random()*60;
+
+    const x = Math.cos(angle) * radius;
+    const y = Math.sin(angle) * radius;
+
+    heart.style.left = centerX + "px";
+    heart.style.top = centerY + "px";
+
+    heart.style.setProperty("--x", x + "px");
+    heart.style.setProperty("--y", y + "px");
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+      heart.remove();
+    },1400);
+  }
+}
+
+function openEnvelope(){
+  document.getElementById("envelope").classList.add("open");
+  document.getElementById("envWrap").classList.add("zoom");
+
+  setTimeout(()=>{
+    const letter=document.getElementById("letterCard");
+    letter.style.display="flex";
+    setTimeout(()=>letter.classList.add("show"),50);
+  },700);
+}
+
+// CLOSE LETTER WHEN CLICKING ANYWHERE OUTSIDE THE BOX
+const letterCard = document.getElementById("letterCard");
+const letterBox = document.querySelector(".letter-box");
+
+letterCard.addEventListener("click", function(e){
+  
+  // If click is NOT inside the letter box
+  if(!letterBox.contains(e.target)){
+    
+    letterCard.classList.remove("show");
+
+    setTimeout(()=>{
+      letterCard.style.display = "none";
+
+      // Reset envelope zoom if needed
+      document.getElementById("envWrap").classList.remove("zoom");
+
+    }, 600);
+
+  }
+});
+
+
+/* ✨ PERFECT STORY POPUP LOGIC ✨ */
+
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach((entry,index)=>{
+    if(entry.isIntersecting){
+      setTimeout(()=>{
+        entry.target.classList.add("show");
+      }, index * 300);
+    }
+  });
+},{ threshold: 0.3 });
+
+document.querySelectorAll(".timeline-item").forEach(item=>{
+  observer.observe(item);
+});
+
+const loveQuotes = [
+  "You understand me even when I don’t say a word.",
+  "Your smile feels like home to me.",
+  "You make ordinary moments magical.",
+  "With you, everything feels right.",
+  "You are my favorite notification.",
+  "You choose me every single day."
+];
+
+function showLove(){
+  const messageBox = document.getElementById("loveMessage");
+
+  const randomQuote = loveQuotes[Math.floor(Math.random() * loveQuotes.length)];
+  
+  messageBox.innerText = `"${randomQuote}"`;
+
+  messageBox.classList.remove("show");
+
+  setTimeout(()=>{
+    messageBox.classList.add("show");
+  },50);
+
+  createConfetti();
+}
+
+/* Soft falling hearts */
+
+function createConfetti(){
+  for(let i=0;i<15;i++){
+    const heart = document.createElement("div");
+    heart.innerHTML = "💗";
+    heart.style.position = "fixed";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.top = "-20px";
+    heart.style.fontSize = "20px";
+    heart.style.animation = "fall 3s linear forwards";
+    document.body.appendChild(heart);
+
+    setTimeout(()=>heart.remove(),3000);
+  }
+}
+
+const style = document.createElement('style');
+style.innerHTML = `
+@keyframes fall{
+  to{
+    transform:translateY(100vh);
+    opacity:0;
+  }
+}`;
+document.head.appendChild(style);
+
+
+const popup = document.getElementById("openPopup");
+const popupMessage = document.getElementById("popupMessage");
+const closeBtn = document.getElementById("closePopup");
+
+const messages = {
+  miss: "Whenever you miss me, close your eyes and remember that I’m always thinking of you too. Distance never changes what I feel for you.",
+  sad: "It’s okay to be sad sometimes. I’m here for you. Take a deep breath and know that this too shall pass. You are strong and loved.",
+  happy: "Seeing you happy makes my heart the happiest. Your smile is my favorite thing in this world.",
+  sleep: "If you can't sleep, imagine me holding your hand and whispering how much I love you. Sweet dreams, my love."
+};
+
+function openLetter(type){
+  popupMessage.innerText = messages[type];
+  popup.style.display = "flex";
+
+  setTimeout(()=>{
+    popup.classList.add("active");
+  },10);
+}
+
+function closeLetter(){
+  popup.classList.remove("active");
+
+  setTimeout(()=>{
+    popup.style.display = "none";
+  },500);
+}
+
+closeBtn.addEventListener("click", closeLetter);
+
+/* Optional: click outside to close */
+popup.addEventListener("click", function(e){
+  if(e.target === popup){
+    closeLetter();
+  }
+});
+
+// CHANGE THIS DATE ANYTIME
+const targetDate = new Date("May 1, 2026 00:00:00").getTime();
+
+function updateCountdown(){
+  const now = new Date().getTime();
+  const gap = targetDate - now;
+
+  const days = Math.floor(gap / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((gap / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((gap / (1000 * 60)) % 60);
+  const seconds = Math.floor((gap / 1000) % 60);
+
+  document.getElementById("days").innerText = days;
+  document.getElementById("hours").innerText = hours;
+  document.getElementById("minutes").innerText = minutes;
+  document.getElementById("seconds").innerText = seconds;
+}
+
+setInterval(updateCountdown,1000);
+updateCountdown();
+
+let noCount = 0;
+
+
+
+function handleNo(){
+  noCount++;
+
+  const title = document.getElementById("proposalTitle");
+  const sub = document.getElementById("proposalSub");
+  const img = document.getElementById("proposalImage");
+  const noBtn = document.getElementById("noButton");
+
+  if(noCount === 1){
+    title.innerText = "How could you? 😡";
+    sub.innerText = "Wrong answer! Try again before I cry...";
+    img.src = "Dudu GIF.gif";
+  }
+
+  else if(noCount === 2){
+    title.innerText = "Still no? 😭";
+    sub.innerText = "Now I'm really sad...";
+    img.src = "Dudu GIF (1).gif";
+
+    // 💖 Hide NO button
+    // noBtn.style.display = "none";
+    noBtn.style.opacity = "0";
+noBtn.style.transform = "scale(0.5)";
+setTimeout(()=>{
+  noBtn.style.display = "none";
+}, 500);
+
+  }
+}
+
+
+function handleYes(){
+
+  const title = document.getElementById("proposalTitle");
+  const sub = document.getElementById("proposalSub");
+  const img = document.getElementById("proposalImage");
+  const buttons = document.getElementById("proposalButtons");
+
+  title.innerText = "I knew you'd say YES! I love you! ❤️";
+  sub.innerText = "";
+  img.src = "Dudu GIF (2).gif";  // dancing gif
+
+  buttons.style.display = "none";
+
+  launchCelebration();
+}
+
+/* celebration effect */
+
+function launchCelebration(){
+  for(let i=0;i<25;i++){
+    const heart = document.createElement("div");
+    heart.innerHTML = "💖";
+    heart.style.position = "fixed";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.top = "-20px";
+    heart.style.fontSize = "20px";
+    heart.style.animation = "fall 3s linear forwards";
+    document.body.appendChild(heart);
+
+    setTimeout(()=>heart.remove(),3000);
+  }
+}
+
+
+document.addEventListener("DOMContentLoaded", function(){
+
+  const timelineItems = document.querySelectorAll(".timeline-item");
+
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach((entry)=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add("show");
+      }
+    });
+  }, { threshold: 0.3 });
+
+  timelineItems.forEach(item=>{
+    observer.observe(item);
+  });
+
+});
+
+</script>
+
+</body>
+</html>

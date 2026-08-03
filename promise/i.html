@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Promises Written in Stars 💙</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&family=Playfair+Display:wght@600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Poppins',sans-serif;
+  background:radial-gradient(circle at top,#0b1d2a,#0f3057,#00587a);
+  color:#eaf6ff;
+  overflow-x:hidden;
+}
+
+canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2}
+
+.rays{position:fixed;inset:0;z-index:-1;background:linear-gradient(120deg,rgba(255,255,255,.05),transparent,rgba(255,255,255,.05));animation:move 8s linear infinite}
+@keyframes move{from{background-position:0 0}to{background-position:200% 200%}}
+
+header{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
+header h1{
+  font-family:'Dancing Script',cursive;
+  font-size:4.8rem;
+  color:#a8dcff;
+  text-shadow:0 0 25px rgba(168,220,255,.8);
+}
+/* header p{max-width:650px;margin-top:20px;font-size:1.2rem;opacity:.9} */
+
+.hint{
+  margin-top:5px;
+  margin-bottom: 20px;
+  font-size:1rem;
+  opacity:.8;
+  animation:pulse 2s infinite;
+  text-align:center;
+}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+
+section{padding:100px 20px;max-width:1200px;margin:auto}
+
+.section-title{
+  text-align:center;
+  font-family:'Dancing Script', cursive;
+  font-size:3.4rem;
+  margin-bottom:20px;
+  color:#bfe6ff;
+  text-shadow:0 0 10px rgba(191,230,255,.6),0 0 25px rgba(127,209,255,.4);
+}
+
+.promises{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:40px}
+
+.flip-card{
+  perspective:1200px;
+  opacity:.4;
+  pointer-events:none;
+  transition:transform .4s ease, box-shadow .4s ease, opacity .4s;
+}
+.flip-card.active{
+  opacity:1;
+  pointer-events:auto;
+}
+.flip-card.active:hover{
+  transform:translateY(-10px) scale(1.03);
+}
+.flip-card.active:hover .front{
+  box-shadow:
+    0 0 0 2px rgba(168,220,255,.6),
+    0 25px 70px rgba(127,209,255,.45),
+    inset 0 0 40px rgba(168,220,255,.25);
+}
+
+.flip-inner{
+  position:relative;
+  height:380px;
+  transition:transform 1s;
+  transform-style:preserve-3d;
+  cursor:pointer;
+}
+.flip-inner.flipped{transform:rotateY(180deg)}
+
+.face{
+  position:absolute;
+  inset:0;
+  border-radius:26px;
+  backface-visibility:hidden;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:25px;
+}
+
+.front{
+  background:rgba(255,255,255,.08);
+  box-shadow:0 25px 60px rgba(0,0,0,.5);
+}
+.front img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:.75;
+}
+.front h3{
+  position:relative;
+  z-index:2;
+  background:rgba(0,0,0,.45);
+  padding:12px 28px;
+  border-radius:40px;
+  font-family:'Playfair Display',serif;
+}
+
+.back{
+  background:linear-gradient(135deg,#1e3c72,#2a5298);
+  transform:rotateY(180deg);
+  font-size:1.05rem;
+  line-height:1.7;
+}
+
+#final{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle,#0f3057,#020c14);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  text-align:center;
+  opacity:0;
+  pointer-events:none;
+  transition:1.5s
+}
+#final.show{opacity:1;pointer-events:auto}
+#final h2{
+  font-family:'Dancing Script',cursive;
+  font-size:4rem;
+  color:#a8dcff;
+  text-shadow:0 0 30px #7fd1ff
+}
+#final p{
+  max-width:650px;
+  font-size:1.2rem;
+  margin-top:20px
+}
+
+.heart-beat{
+  display:inline-block;
+  animation:heartPump 1.6s infinite;
+  transform-origin:center;
+  text-shadow:0 0 20px #7fd1ff;
+}
+
+@keyframes heartPump{
+  0%{transform:scale(1)}
+  15%{transform:scale(1.15)}
+  25%{transform:scale(1)}
+  40%{transform:scale(1.22)}
+  55%{transform:scale(1)}
+  100%{transform:scale(1)}
+}
+
+.final-heart{
+  font-size:6rem;
+  margin:25px 0;
+  animation:heartPumpFinal 1.8s infinite;
+  text-shadow:
+    0 0 20px #7fd1ff,
+    0 0 40px #3aaaff,
+    0 0 80px rgba(58,170,255,0.7);
+}
+
+@keyframes heartPumpFinal{
+  0%{transform:scale(1)}
+  14%{transform:scale(1.2)}
+  24%{transform:scale(1)}
+  42%{transform:scale(1.32)}
+  58%{transform:scale(1)}
+  100%{transform:scale(1)}
+}
+
+.love-text{
+  font-family:'Dancing Script',cursive;
+  font-size:3.8rem;
+  color:#bfe6ff;
+  text-shadow:0 0 25px rgba(191,230,255,.9);
+}
+
+/* #final p{
+  font-family:'Playfair Display',serif;
+  font-size:1.05rem;
+  letter-spacing:0.5px;
+  opacity:0.95;
+}
+
+header p{
+  font-family:'Playfair Display',serif;
+  font-size:1.25rem;
+  line-height:1.8;
+  letter-spacing:0.4px;
+} */
+
+/* header p,
+#final p{
+  font-family:'Poppins',sans-serif;
+  font-weight:300;
+  font-size:1.15rem;
+  line-height:1.9;
+  letter-spacing:0.3px;
+  opacity:0.95;
+} */
+
+header p,
+#final p{
+  font-family:'Dancing Script', cursive;
+  font-size:1.6rem;
+  line-height:1.9;
+  letter-spacing:0.4px;
+  margin-top:22px;
+  margin-bottom:22px;
+  padding:0 10px;
+  opacity:0.95;
+}
+header p{
+  max-width:720px;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:26px;
+
+}
+
+
+/* .word{
+  opacity:0;
+  display:inline-block;
+  animation:wordFade 0.6s forwards;
+}
+
+@keyframes wordFade{
+  from{
+    opacity:0;
+    transform:translateY(6px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+} */
+
+/* .word{
+  opacity:0;
+  display:inline-block;
+  animation:wordFade 0.8s forwards;
+} */
+ .word{
+  opacity:0;
+  display:inline-block;
+  animation:wordFade 0.8s forwards;
+  margin-right:6px;   /* ⭐ this fixes readability */
+}
+
+
+@keyframes wordFade{
+  from{
+    opacity:0;
+    transform:translateY(3px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+.heart-bloom{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:4rem;
+  pointer-events:none;
+  animation:bloom 0.9s ease-out forwards;
+  color:#7fd1ff;
+  text-shadow:
+    0 0 20px #7fd1ff,
+    0 0 50px #3aaaff,
+    0 0 90px rgba(58,170,255,.8);
+}
+
+@keyframes bloom{
+  0%{
+    transform:scale(0.2);
+    opacity:0;
+  }
+  40%{
+    transform:scale(1.3);
+    opacity:1;
+  }
+  100%{
+    transform:scale(1.8);
+    opacity:0;
+  }
+}
+
+
+</style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+<div class="rays"></div>
+
+<audio id="music" src="Love_me_like_you_do_-_love_me_like_you_do_(mp3.pm).mp3" loop></audio>
+
+<header>
+  <div>
+    <!-- <h1>My Promises To <span id="name">You 💙</span></h1> -->
+     <h1>My Promises To <span id="name">You <span class="heart-beat">💙</span></span></h1>
+
+    <p>
+      In a world full of noise, you became my calm.
+      Before you read my promises, I want you to feel how deeply you are loved.
+    </p>
+
+    <p style="margin-top:18px;font-size:1.1rem;opacity:.95">
+      Tonight, every star above us is carrying one feeling I never want to lose — <br>
+      <strong>YOU.</strong>
+    </p>
+  </div>
+</header>
+
+<section>
+  <h2 class="section-title">7 Promises, One Forever</h2>
+
+  <!-- ✅ MOVED HERE -->
+  <div class="hint">💫 Tap the first promise… my heart is waiting 💫</div>
+
+  <div class="promises">
+    <div class="flip-card active"><div class="flip-inner"><div class="face front"><img src="1.png"><h3>Promise #1</h3></div><div class="face back">I promise to always choose you.</div></div></div>
+    <div class="flip-card"><div class="flip-inner"><div class="face front"><img src="2.png"><h3>Promise #2</h3></div><div class="face back">I promise to stand with you in every storm.</div></div></div>
+    <div class="flip-card"><div class="flip-inner"><div class="face front"><img src="3.png"><h3>Promise #3</h3></div><div class="face back">I promise to protect your dreams.</div></div></div>
+    <div class="flip-card"><div class="flip-inner"><div class="face front"><img src="4.png"><h3>Promise #4</h3></div><div class="face back">I promise to love every version of you.</div></div></div>
+    <div class="flip-card"><div class="flip-inner"><div class="face front"><img src="5.png"><h3>Promise #5</h3></div><div class="face back">I promise to listen with my heart.</div></div></div>
+    <div class="flip-card"><div class="flip-inner"><div class="face front"><img src="6.png"><h3>Promise #6</h3></div><div class="face back">I promise to be your safe place.</div></div></div>
+    <div class="flip-card"><div class="flip-inner"><div class="face front"><img src="7.png"><h3>Promise #7</h3></div><div class="face back">I promise this love — forever.</div></div></div>
+  </div>
+</section>
+
+<!-- <div id="final">
+  <h2>Forever With You 💙</h2>
+  <p>These promises are not words. They are my soul choosing you — always.</p>
+</div> -->
+
+<div id="final">
+  <h2>Forever With You</h2>
+
+  <div class="final-heart">💙</div>
+
+  <h3 class="love-text">I Love You</h3>
+
+  <p>From the bottom of my heart</p>
+</div>
+
+
+<script>
+const c=document.getElementById('stars'),x=c.getContext('2d');let w,h,s=[];
+function r(){w=c.width=innerWidth;h=c.height=innerHeight}
+addEventListener('resize',r);r();
+for(let i=0;i<180;i++)s.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.5+0.5,v:Math.random()*.3+.1});
+(function d(){x.clearRect(0,0,w,h);x.fillStyle='#ccecff';s.forEach(t=>{x.beginPath();x.arc(t.x,t.y,t.r,0,6.28);x.fill();t.y+=t.v;if(t.y>h)t.y=0});requestAnimationFrame(d)})();
+
+const cards=document.querySelectorAll('.flip-card');
+const music=document.getElementById('music');
+let unlocked=0,started=false;
+
+cards.forEach((card,i)=>{
+  card.addEventListener('click',()=>{
+    if(i!==unlocked)return;
+    if(!started){music.play();started=true}
+    // const inner=card.querySelector('.flip-inner');
+    function bloomHeart(card){
+  const bloom = document.createElement("div");
+  bloom.className = "heart-bloom";
+  bloom.innerHTML = "💙";
+  card.appendChild(bloom);
+  setTimeout(()=>bloom.remove(),900);
+}
+
+    const inner = card.querySelector('.flip-inner');
+bloomHeart(card);
+if(navigator.vibrate) navigator.vibrate(18);
+
+    // if(!inner.classList.contains('flipped')){
+    //   inner.classList.add('flipped');
+    //   setTimeout(()=>{
+    //     unlocked++;
+    //     if(cards[unlocked])cards[unlocked].classList.add('active');
+    //     if(unlocked===cards.length)document.getElementById('final').classList.add('show');
+    //   },900);
+    // }
+    if(!inner.classList.contains('flipped')){
+  // flip forward
+  inner.classList.add('flipped');
+
+  setTimeout(()=>{
+    // unlock next card ONLY once
+    if(i === unlocked){
+      unlocked++;
+      if(cards[unlocked])cards[unlocked].classList.add('active');
+      if(unlocked === cards.length){
+        document.getElementById('final').classList.add('show');
+      }
+    }
+  },900);
+
+}else{
+  // flip back
+  inner.classList.remove('flipped');
+}
+
+  })
+})
+function animateText(selector){
+  document.querySelectorAll(selector).forEach(el=>{
+    const words = el.innerText.split(" ");
+    el.innerHTML = "";
+    words.forEach((word,i)=>{
+      const span = document.createElement("span");
+      span.className = "word";
+    //   span.style.animationDelay = `${i*0.12}s`;
+    span.style.animationDelay = `${i*0.15}s`;
+
+      span.innerText = word + " ";
+      el.appendChild(span);
+    });
+  });
+}
+
+// animate first page paragraphs + final page text
+animateText("header p, #final p");
+
+</script>
+
+</body>
+</html>
